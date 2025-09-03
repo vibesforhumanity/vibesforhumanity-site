@@ -32,10 +32,24 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--text);
-  background: radial-gradient(1200px 600px at 80% -10%, rgba(103, 232, 249, 0.15), rgba(0,0,0,0)) no-repeat,
-              radial-gradient(1000px 500px at -10% 0%, rgba(167, 139, 250, 0.18), rgba(0,0,0,0)) no-repeat,
-              var(--bg);
+  /* Subtle, lighter animated gradient using Explore Apps colors */
+  background:
+    linear-gradient(-45deg,
+      color-mix(in oklab, var(--primary) 18%, transparent),
+      color-mix(in oklab, var(--accent) 16%, transparent),
+      color-mix(in oklab, var(--primary) 14%, transparent),
+      color-mix(in oklab, var(--accent) 12%, transparent)
+    ),
+    var(--bg);
+  background-size: 800% 800%, auto;
+  animation: gradient 36s ease infinite;
   line-height: 1.6;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 a { color: inherit; text-decoration: none; }
@@ -65,7 +79,7 @@ a:hover { text-decoration: underline; }
 .nav a:hover { color: var(--text); text-decoration: none; }
 
 /* Hero */
-.hero { padding: 72px 0 36px; }
+.hero { padding: 56px 0 8px; }
 .hero-inner { text-align: center; }
 .hero h1 {
   font-size: clamp(28px, 4.2vw, 44px);
@@ -91,7 +105,8 @@ a:hover { text-decoration: underline; }
 .btn.small { padding: 8px 12px; font-size: 14px; }
 
 /* Sections */
-.section { padding: 44px 0; }
+.section { padding: 40px 0; }
+.section#apps { padding-top: 8px; }
 .section.alt { background: color-mix(in oklab, var(--surface) 70%, transparent); border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent); }
 .section-title { font-size: 22px; margin: 0 0 18px; letter-spacing: 0.3px; }
 
@@ -102,17 +117,23 @@ a:hover { text-decoration: underline; }
   gap: 16px;
 }
 .card {
+  position: relative;
   padding: 18px;
   background: color-mix(in oklab, var(--surface-2) 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
   border-radius: var(--radius);
   box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 10px 26px rgba(2,6,23,.14);
 }
+.card-top { display: grid; grid-template-columns: 1fr auto; align-items: baseline; column-gap: 8px; }
 .card-meta { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+/* Remove bottom margin when meta is in the top row */
+.card-top .card-meta { margin-bottom: 0; }
+/* Make status clearly smaller, lighter, uppercase, right-aligned */
+.card .card-status { display: inline-block; font-size: 10px; line-height: 1; font-weight: 300; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); text-align: right; white-space: nowrap; }
 .card-title { margin: 0 0 6px; font-size: 18px; }
 .card-body { margin: 0 0 12px; color: var(--text); }
 .card-actions { display: flex; gap: 10px; align-items: center; }
-.chip { display: inline-block; font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px; color: var(--text); background: color-mix(in oklab, var(--primary) 24%, transparent); border: 1px solid color-mix(in oklab, var(--primary) 45%, transparent); text-decoration: none; }
+.chip { display: inline-block; font-size: 13px; font-weight: 600; padding: 0; border-radius: 0; color: var(--muted); background: transparent; border: 0; text-decoration: none; }
 
 /* Bullets */
 .bullets { margin: 0; padding-left: 18px; }
@@ -130,4 +151,3 @@ a:hover { text-decoration: underline; }
   .nav { gap: 12px; }
   .footer-inner { gap: 12px; }
 }
-
